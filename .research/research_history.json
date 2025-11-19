@@ -234,7 +234,74 @@
     "iterations": [
       {
         "iteration_id": 1,
-        "method": "OMEGA-LR  (Online Magnitude-Equalising & Gap-Aware Learning Rate)\n\nNotation per step t:  θ_{ℓ,t} – parameters of layer ℓ;  û_{ℓ,t} – AdamW pre-conditioned update *before* the LR is applied;  w̄_{ℓ,t} – EMA of current weight norm;  ρ̄_{ℓ,t} – EMA of realised update ratio;  g_t – generalisation ratio.\n\n1.  Streaming validation exactly as in SIGMA-LR (256-example buffer, K=4) yields\n        g_t = (L̄^val_t+ε)/(L̄^tr_t+ε).\n2.  For every layer collect the *effective* update magnitude that AdamW will apply **without an extra backward pass**:\n        û_{ℓ,t} = ‖lr_{ℓ,t−1} · m̂_{ℓ,t}/(√v̂_{ℓ,t}+ε)‖_2.\n   (exp_avg m̂ and second moment v̂ are already in optimiser state.)\n3.  Maintain slow EMAs (β_w≈0.99, β_ρ≈0.95):\n        w̄_{ℓ,t} = β_w w̄_{ℓ,t−1} + (1−β_w) ‖θ_{ℓ,t−1}‖_2\n        ρ̄_{ℓ,t} = β_ρ ρ̄_{ℓ,t−1} + (1−β_ρ) (û_{ℓ,t}/(w̄_{ℓ,t}+ε)).\n4.  Define the *current* ratio and its self-normalised sharpness signal:\n        ρ_{ℓ,t} = û_{ℓ,t}/(w̄_{ℓ,t}+ε),\n        s_{ℓ,t} = ρ_{ℓ,t}/(ρ̄_{ℓ,t}+ε).\n5.  Choose a *target* layer ratio that shrinks when the gap widens:\n        ρ*_t = ρ_0 · g_t^{−β_g}, ρ_0≈1.0e−3, β_g≈0.5.\n6.  Closed-loop LR update (integral controller with gain κ≈0.3):\n        lr_{ℓ,t} = lr_{ℓ,t−1} · (ρ*_t/(ρ_{ℓ,t}+ε))^{κ}.\n7.  Clip to [0.2, 5]·lr_base and reuse AdamW’s weight-decay & momentum unchanged.\n\nKey distinctions versus SIGMA-LR\n• Uses the *actual* Adam step, not the raw gradient.\n• Re-centres on a drifting weight-norm baseline w̄_{ℓ,t}.\n• Drives each layer toward a theory-backed target ratio that contracts with over-fitting, instead of reacting heuristically to relative gradient spikes.\n• Adds only two EMAs per layer (w̄, ρ̄) and reuses optimiser state—no extra memory for parameters or gradients."
+        "method": "OMEGA-LR  (Online Magnitude-Equalising & Gap-Aware Learning Rate)\n\nNotation per step t:  θ_{ℓ,t} – parameters of layer ℓ;  û_{ℓ,t} – AdamW pre-conditioned update *before* the LR is applied;  w̄_{ℓ,t} – EMA of current weight norm;  ρ̄_{ℓ,t} – EMA of realised update ratio;  g_t – generalisation ratio.\n\n1.  Streaming validation exactly as in SIGMA-LR (256-example buffer, K=4) yields\n        g_t = (L̄^val_t+ε)/(L̄^tr_t+ε).\n2.  For every layer collect the *effective* update magnitude that AdamW will apply **without an extra backward pass**:\n        û_{ℓ,t} = ‖lr_{ℓ,t−1} · m̂_{ℓ,t}/(√v̂_{ℓ,t}+ε)‖_2.\n   (exp_avg m̂ and second moment v̂ are already in optimiser state.)\n3.  Maintain slow EMAs (β_w≈0.99, β_ρ≈0.95):\n        w̄_{ℓ,t} = β_w w̄_{ℓ,t−1} + (1−β_w) ‖θ_{ℓ,t−1}‖_2\n        ρ̄_{ℓ,t} = β_ρ ρ̄_{ℓ,t−1} + (1−β_ρ) (û_{ℓ,t}/(w̄_{ℓ,t}+ε)).\n4.  Define the *current* ratio and its self-normalised sharpness signal:\n        ρ_{ℓ,t} = û_{ℓ,t}/(w̄_{ℓ,t}+ε),\n        s_{ℓ,t} = ρ_{ℓ,t}/(ρ̄_{ℓ,t}+ε).\n5.  Choose a *target* layer ratio that shrinks when the gap widens:\n        ρ*_t = ρ_0 · g_t^{−β_g}, ρ_0≈1.0e−3, β_g≈0.5.\n6.  Closed-loop LR update (integral controller with gain κ≈0.3):\n        lr_{ℓ,t} = lr_{ℓ,t−1} · (ρ*_t/(ρ_{ℓ,t}+ε))^{κ}.\n7.  Clip to [0.2, 5]·lr_base and reuse AdamW’s weight-decay & momentum unchanged.\n\nKey distinctions versus SIGMA-LR\n• Uses the *actual* Adam step, not the raw gradient.\n• Re-centres on a drifting weight-norm baseline w̄_{ℓ,t}.\n• Drives each layer toward a theory-backed target ratio that contracts with over-fitting, instead of reacting heuristically to relative gradient spikes.\n• Adds only two EMAs per layer (w̄, ρ̄) and reuses optimiser state—no extra memory for parameters or gradients.",
+        "experimental_design": {
+          "experiment_summary": "Goal: Demonstrate that OMEGA-LR—an online, optimiser-aware layer-wise learning-rate controller—improves the mathematical-reasoning ability of a 0.6-billion-parameter language model when few-shot fine-tuned on GSM8K.\nTask: The model must generate the single correct integer or fraction that answers each grade-school word problem. A prediction is considered correct only if its final answer exactly matches the ground truth after numeric canonicalisation.\nWorkflow:\n1. Load Qwen3-0.6B in fp16 on one A100/H200 GPU.\n2. Fine-tune for three epochs on the GSM8K train split with AdamW. All experiments share the same optimiser, batch schedule, and random seeds.\n3. Replace the plain learning-rate schedule with:\n   • Proposed: OMEGA-LR (closed-loop control based on realised update-to-weight ratio and online generalisation gap).\n   • Baseline: SIGMA-LR (state-of-the-art sharpness-triggered controller).\n4. Evaluate every 100 optimisation steps on the dev split using greedy decoding (temperature 0) and compute all metrics.\n5. Log per-layer update-to-weight ratios, GPU memory, and step time through PyTorch hooks.\n6. Hyper-parameter search over four OMEGA-LR hyper-parameters with a 20-trial random grid; early stop whenever EM < constant-LR baseline after one epoch.\n7. Produce learning curves, histogram of update ratios after epoch 3, and wall-time bar chart.\nThe experiment finishes when all three seeds for both methods have converged or reached the epoch limit.",
+          "evaluation_metrics": [
+            {
+              "name": "Exact-match (EM) accuracy on GSM8K dev.",
+              "description": "Correctness: a generated answer is correct if, after removing whitespace and enclosing punctuation, it exactly equals the reference numeric string or, for fractions, an equivalent reduced fraction (e.g. 1/2 == 2/4).  Calculation: EM = (# correctly answered problems) / (total # problems).  Suitability: GSM8K problems have a single deterministic answer, so EM directly reflects task success.  Visualisations: learning-curve plot of EM versus update steps for each method and seed."
+            },
+            {
+              "name": "Steps to reach 55 % EM",
+              "description": "Correctness criterion identical to EM.  Calculation: the first optimisation step at which running-average EM ≥ 0.55; if never reached, count as max-steps+1.  Suitability: measures sample-efficiency and convergence speed.  Visualisations: bar chart comparing mean steps across seeds."
+            },
+            {
+              "name": "Per-layer update-to-weight ratio distribution",
+              "description": "For every optimisation step, compute ρ_{ℓ}=‖Δθ_ℓ‖/‖θ_ℓ‖.  After training, aggregate the last 250 steps for each layer and plot histogram.  Metric reported as mean ± std-dex (log10 scale).  Suitability: directly tests OMEGA-LR’s control objective.  Visualisations: overlaid histograms or violin plots per method."
+            },
+            {
+              "name": "GPU memory/time overhead relative to constant LR",
+              "description": "Correctness: N/A (resource metric).  Calculation: (peak memory_or_step_time_with_method – peak_with_constantLR) / peak_with_constantLR.  Suitability: demonstrates practical feasibility.  Visualisations: grouped bar chart for memory and time."
+            },
+            {
+              "name": "Exact-match (EM) accuracy on GSM8K dev.\nSecondary (1) steps to reach 55 % EM, (2) per-layer update-to-weight ratio distribution, (3) GPU memory/time overhead relative to constant LR.",
+              "description": "Primary metric as specified in hypothesis: Exact-match (EM) accuracy on GSM8K dev.\nSecondary (1) steps to reach 55 % EM, (2) per-layer update-to-weight ratio distribution, (3) GPU memory/time overhead relative to constant LR."
+            }
+          ],
+          "proposed_method": "OMEGA-LR (Online Magnitude-Equalising & Gap-Aware Learning Rate)\nObjectives: keep each layer’s realised update-to-weight ratio near a data-driven target while shrinking that target as the online generalisation gap widens, thereby achieving scale-invariant, optimiser-aware learning-rate adaptation with minimal overhead.\nTheory: Extends trust-region ideas to first-order optimisation by treating ρ = ‖Δθ‖/‖θ‖ as a stability proxy.  A proportional-integral controller drives ρ toward ρ* = ρ₀·g^{−β_g}, where g is the streaming validation-to-train loss ratio.\nAlgorithm per step t:\n1. Stream K=4 validation mini-batches from a 256-example ring buffer; update exponential moving averages (EMAs) of train and val losses to obtain gap g_t.\n2. For each layer ℓ, use AdamW’s stored (m̂, v̂) to estimate the magnitude û_{ℓ,t} of the *pre-conditioned* update that will be applied at step t (no extra backward pass).\n3. Maintain EMAs of weight norms w̄_{ℓ,t} (β_w=0.99) and realised ratios ρ̄_{ℓ,t} (β_ρ=0.95).\n4. Compute current ratio ρ_{ℓ,t} = û_{ℓ,t}/(w̄_{ℓ,t}+ε).\n5. Form target ratio ρ*_t = ρ₀·g_t^{−β_g} with ρ₀≈1e-3, β_g≈0.5.\n6. Update per-layer LR by lr_{ℓ,t} = lr_{ℓ,t−1}·(ρ*_t/(ρ_{ℓ,t}+ε))^{κ}, κ≈0.3, then clip to [0.2, 5]·lr_base.\n7. Perform AdamW weight update; repeat.\nImplementation: adds two float32 buffers per layer (<1 MB for 0.6B model) and a 50-line optimiser wrapper; compatible with fsdp/accelerate.",
+          "comparative_methods": [
+            "SIGMA-LR"
+          ],
+          "models_to_use": [
+            "Qwen3-0.6B"
+          ],
+          "datasets_to_use": [
+            "gsm8k"
+          ],
+          "hyperparameters_to_search": [
+            {
+              "name": "rho_0",
+              "range": "5e-4,1e-3,2e-3"
+            },
+            {
+              "name": "beta_g",
+              "range": "0.3-0.7"
+            },
+            {
+              "name": "kappa",
+              "range": "0.2-0.5"
+            },
+            {
+              "name": "lr_base",
+              "range": "5e-6-2e-5"
+            }
+          ]
+        },
+        "experiment_runs": [
+          {
+            "run_id": "proposed-iter1-Qwen3-0.6B-gsm8k",
+            "method_name": "proposed",
+            "model_name": "Qwen3-0.6B",
+            "dataset_name": "gsm8k"
+          },
+          {
+            "run_id": "comparative-1-iter1-Qwen3-0.6B-gsm8k",
+            "method_name": "comparative-1",
+            "model_name": "Qwen3-0.6B",
+            "dataset_name": "gsm8k"
+          }
+        ]
       }
     ]
   }
