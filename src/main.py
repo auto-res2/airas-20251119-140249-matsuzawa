@@ -20,7 +20,10 @@ def main(cfg):
     # Add config group override if not present
     run_id = cfg.run
     has_runs_override = any(o.startswith("runs@run=") or o.startswith("+runs@run=") for o in overrides)
-    if not has_runs_override:
+    has_run_value_override = any(o.startswith("run=") for o in overrides)
+    # Only add +runs@run= if neither runs@run= nor run= is specified
+    # (run= will trigger Hydra to use the default config group automatically)
+    if not has_runs_override and not has_run_value_override:
         overrides = [f"+runs@run={run_id}"] + list(overrides)
 
     cmd = ["python", "-u", "-m", "src.train", *overrides]
