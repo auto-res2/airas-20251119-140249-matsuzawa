@@ -15,10 +15,10 @@ validation:
   buffer_size: 256
   k: 4
 model:
-  name: Qwen3-0.6B
+  name: Qwen/Qwen2.5-0.5B
   num_layers: 24
-  hidden_size: 4096
-  num_attention_heads: 16
+  hidden_size: 896
+  num_attention_heads: 14
   precision: fp16
 dataset:
   name: gsm8k

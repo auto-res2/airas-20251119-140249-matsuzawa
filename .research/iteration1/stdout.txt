@@ -117,3 +117,7 @@ Executing: python -u -m src.train runs@run=proposed-iter1-Qwen3-0.6B-gsm8k resul
 [Run proposed-iter1-Qwen3-0.6B-gsm8k completed] EM=0.0000
 === [TRIAL RUN] PASSED for proposed-iter1-Qwen3-0.6B-gsm8k at Wed Nov 19 04:39:07 PM UTC 2025 ===
 
+=== [UV SYNC] Start at Wed Nov 19 04:40:35 PM UTC 2025 ===
+=== [UV SYNC] Finished successfully at Wed Nov 19 04:40:41 PM UTC 2025 ===
+=== [TRIAL RUN] Start for comparative-1-iter1-Qwen3-0.6B-gsm8k at Wed Nov 19 04:40:41 PM UTC 2025 ===
+Executing: python -u -m src.train runs@run=comparative-1-iter1-Qwen3-0.6B-gsm8k results_dir=.research/iteration1 mode=trial
