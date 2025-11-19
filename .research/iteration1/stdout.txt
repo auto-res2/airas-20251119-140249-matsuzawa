@@ -121,3 +121,122 @@ Executing: python -u -m src.train runs@run=proposed-iter1-Qwen3-0.6B-gsm8k resul
 === [UV SYNC] Finished successfully at Wed Nov 19 04:40:41 PM UTC 2025 ===
 === [TRIAL RUN] Start for comparative-1-iter1-Qwen3-0.6B-gsm8k at Wed Nov 19 04:40:41 PM UTC 2025 ===
 Executing: python -u -m src.train runs@run=comparative-1-iter1-Qwen3-0.6B-gsm8k results_dir=.research/iteration1 mode=trial
+=== [UV SYNC] Start at Wed Nov 19 04:44:05 PM UTC 2025 ===
+=== [UV SYNC] Finished successfully at Wed Nov 19 04:44:10 PM UTC 2025 ===
+=== [TRIAL RUN] Start for comparative-1-iter1-Qwen3-0.6B-gsm8k at Wed Nov 19 04:44:10 PM UTC 2025 ===
+Executing: python -u -m src.train runs@run=comparative-1-iter1-Qwen3-0.6B-gsm8k results_dir=.research/iteration1 mode=trial
+[2025-11-19 16:45:00,147][transformers.tokenization_utils_base][WARNING] - You're using a Qwen2TokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+[2025-11-19 17:03:26,616][transformers.generation.configuration_utils][WARNING] - The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[2025-11-19 17:03:26,617][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:03:26,617][transformers.generation.utils][WARNING] - A decoder-only architecture is being used, but right-padding was detected! For correct generation results, please set `padding_side='left'` when initializing the tokenizer.
+[2025-11-19 17:03:29,828][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:03:33,475][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:03:37,125][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:03:40,818][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:03:44,323][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:03:47,423][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:03:50,939][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:03:54,265][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:03:57,240][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:03:57,240][transformers.generation.utils][WARNING] - A decoder-only architecture is being used, but right-padding was detected! For correct generation results, please set `padding_side='left'` when initializing the tokenizer.
+[2025-11-19 17:04:00,298][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:04:03,207][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:04:06,199][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:04:09,371][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:04:12,529][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:04:15,598][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:04:18,652][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:04:18,653][transformers.generation.utils][WARNING] - A decoder-only architecture is being used, but right-padding was detected! For correct generation results, please set `padding_side='left'` when initializing the tokenizer.
+[2025-11-19 17:04:21,663][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:04:25,310][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:04:28,966][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:04:32,637][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:04:36,124][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:04:39,223][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:04:42,746][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:04:46,071][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:04:49,060][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:04:49,060][transformers.generation.utils][WARNING] - A decoder-only architecture is being used, but right-padding was detected! For correct generation results, please set `padding_side='left'` when initializing the tokenizer.
+[2025-11-19 17:04:52,117][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:04:55,036][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:04:58,022][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:05:01,191][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:05:04,339][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:05:07,417][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:05:15,358][transformers.tokenization_utils_base][WARNING] - You're using a Qwen2TokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+[2025-11-19 17:30:55,763][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:30:55,764][transformers.generation.utils][WARNING] - A decoder-only architecture is being used, but right-padding was detected! For correct generation results, please set `padding_side='left'` when initializing the tokenizer.
+[2025-11-19 17:30:58,971][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:31:02,640][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:31:06,309][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:31:10,005][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:31:13,529][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:31:16,653][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:31:20,200][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:31:23,553][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:31:26,556][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:31:26,556][transformers.generation.utils][WARNING] - A decoder-only architecture is being used, but right-padding was detected! For correct generation results, please set `padding_side='left'` when initializing the tokenizer.
+[2025-11-19 17:31:29,621][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:31:32,551][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:31:35,559][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:31:38,737][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:31:41,913][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:31:45,016][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:31:48,089][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:31:48,090][transformers.generation.utils][WARNING] - A decoder-only architecture is being used, but right-padding was detected! For correct generation results, please set `padding_side='left'` when initializing the tokenizer.
+[2025-11-19 17:31:51,114][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:31:54,777][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:31:58,435][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:32:02,147][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:32:05,681][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:32:08,812][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:32:12,358][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:32:15,701][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:32:18,710][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:32:18,711][transformers.generation.utils][WARNING] - A decoder-only architecture is being used, but right-padding was detected! For correct generation results, please set `padding_side='left'` when initializing the tokenizer.
+[2025-11-19 17:32:21,786][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:32:24,719][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:32:27,728][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:32:30,904][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:32:34,080][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:32:37,175][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:32:45,307][transformers.tokenization_utils_base][WARNING] - You're using a Qwen2TokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+[2025-11-19 17:52:16,650][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:52:16,650][transformers.generation.utils][WARNING] - A decoder-only architecture is being used, but right-padding was detected! For correct generation results, please set `padding_side='left'` when initializing the tokenizer.
+[2025-11-19 17:52:20,019][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:52:23,676][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:52:27,343][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:52:31,035][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:52:34,564][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:52:37,712][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:52:41,263][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:52:44,624][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:52:47,628][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:52:47,629][transformers.generation.utils][WARNING] - A decoder-only architecture is being used, but right-padding was detected! For correct generation results, please set `padding_side='left'` when initializing the tokenizer.
+[2025-11-19 17:52:50,718][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:52:53,639][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:52:56,652][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:52:59,828][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:53:03,003][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:53:06,096][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:53:09,179][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:53:09,179][transformers.generation.utils][WARNING] - A decoder-only architecture is being used, but right-padding was detected! For correct generation results, please set `padding_side='left'` when initializing the tokenizer.
+[2025-11-19 17:53:12,214][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:53:15,887][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:53:19,551][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:53:23,259][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:53:26,789][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:53:29,907][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:53:33,468][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:53:36,815][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:53:39,823][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:53:39,823][transformers.generation.utils][WARNING] - A decoder-only architecture is being used, but right-padding was detected! For correct generation results, please set `padding_side='left'` when initializing the tokenizer.
+[2025-11-19 17:53:42,903][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:53:45,838][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:53:48,843][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:53:52,018][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:53:55,198][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[2025-11-19 17:53:58,295][transformers.generation.utils][WARNING] - Setting `pad_token_id` to `eos_token_id`:151643 for open-end generation.
+[Run comparative-1-iter1-Qwen3-0.6B-gsm8k completed] EM=0.0000
+=== [TRIAL RUN] PASSED for comparative-1-iter1-Qwen3-0.6B-gsm8k at Wed Nov 19 05:54:01 PM UTC 2025 ===
+
