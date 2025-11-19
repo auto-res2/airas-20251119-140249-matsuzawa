@@ -18,13 +18,29 @@ def main(cfg):
     overrides = HydraConfig.get().overrides.task  # exact CLI overrides
 
     # Add config group override if not present
-    run_id = cfg.run
+    # Extract run_id - cfg.run could be a string or object with run_id field
+    if isinstance(cfg.run, str):
+        run_id = cfg.run
+    else:
+        run_id = cfg.run.run_id
+
     has_runs_override = any(o.startswith("runs@run=") or o.startswith("+runs@run=") for o in overrides)
-    has_run_value_override = any(o.startswith("run=") for o in overrides)
-    # Only add +runs@run= if neither runs@run= nor run= is specified
-    # (run= will trigger Hydra to use the default config group automatically)
-    if not has_runs_override and not has_run_value_override:
-        overrides = [f"+runs@run={run_id}"] + list(overrides)
+
+    # Convert run= overrides to runs@run= to use config group
+    new_overrides = []
+    for o in overrides:
+        if o.startswith("run="):
+            # Extract the run_id from run=<value> and convert to runs@run=<value>
+            run_value = o.split("=", 1)[1]
+            new_overrides.append(f"runs@run={run_value}")
+        else:
+            new_overrides.append(o)
+    overrides = new_overrides
+
+    # Only add runs@run= if not already specified
+    has_runs_override = any(o.startswith("runs@run=") or o.startswith("+runs@run=") for o in overrides)
+    if not has_runs_override:
+        overrides = [f"runs@run={run_id}"] + list(overrides)
 
     cmd = ["python", "-u", "-m", "src.train", *overrides]
     print("Executing:", " ".join(cmd))
