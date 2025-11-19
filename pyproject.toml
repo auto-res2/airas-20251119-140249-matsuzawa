@@ -1,1 +1,17 @@
-# Please list the required python packages.
+[project]
+name = "omega_lr_gsm8k"
+version = "0.1.0"
+requires-python = ">=3.9"
+
+[project.dependencies]
+torch = ">=2.1"
+transformers = "*"
+datasets = "*"
+hydra-core = "*"
+wandb = "*"
+optuna = "*"
+matplotlib = "*"
+seaborn = "*"
+pandas = "*"
+scikit-learn = "*"
+scipy = "*"

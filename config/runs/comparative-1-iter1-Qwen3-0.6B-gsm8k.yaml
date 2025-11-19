@@ -1,0 +1,76 @@
+run_id: comparative-1-iter1-Qwen3-0.6B-gsm8k
+method: baseline
+algorithm:
+  name: SIGMA-LR
+  params:
+    sharpness_threshold: 1.0
+    lr_increase_factor: 1.5
+    lr_decrease_factor: 0.5
+    ema_beta: 0.95
+    eps: 1.0e-8
+    lr_clip_factor:
+      min: 0.2
+      max: 5.0
+validation:
+  buffer_size: 256
+  k: 4
+model:
+  name: Qwen3-0.6B
+  num_layers: 24
+  hidden_size: 4096
+  num_attention_heads: 16
+  precision: fp16
+dataset:
+  name: gsm8k
+  config: main
+  train_split: train
+  val_split: test
+  max_seq_length: 512
+  batch_size: 8
+  gradient_accumulation_steps: 8
+training:
+  epochs: 3
+  optimizer:
+    name: adamw
+    base_lr: 1.0e-5
+    weight_decay: 0.1
+    betas: [0.9, 0.999]
+  scheduler: constant
+  seed_list: [42, 43, 44]
+logging:
+  metrics:
+    - em
+    - steps_to_55_em
+    - layer_update_ratio
+    - gpu_overhead
+compute:
+  device: cuda
+  precision: fp16
+optuna:
+  n_trials: 15
+  direction: maximize
+  metric: em
+  search_space:
+    algorithm.params.sharpness_threshold:
+      type: uniform
+      low: 0.5
+      high: 2.0
+    algorithm.params.lr_increase_factor:
+      type: uniform
+      low: 1.2
+      high: 2.5
+    algorithm.params.lr_decrease_factor:
+      type: uniform
+      low: 0.1
+      high: 0.8
+    training.optimizer.base_lr:
+      type: loguniform
+      low: 5e-6
+      high: 2e-5
+callbacks:
+  checkpoint:
+    monitor: em
+    mode: max
+  early_stopping:
+    monitor: em
+    patience: 2000

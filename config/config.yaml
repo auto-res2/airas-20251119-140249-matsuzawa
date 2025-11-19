@@ -1,0 +1,24 @@
+# config/config.yaml
+# ---------------------------------------------------------------------------
+# Root Hydra configuration.  The *run* group selects a YAML from
+# config/runs/<run_id>.yaml and mounts it under cfg.run.
+# ---------------------------------------------------------------------------
+
+defaults:
+  - _self_
+  - runs@run: ${run}
+
+run: ???            # Provided via CLI, e.g. run=proposed-iter1-Qwen3-0.6B-gsm8k
+
+results_dir: ./results
+mode: full          # full | trial
+
+wandb:
+  entity: gengaru617-personal
+  project: 2025-11-19
+  mode: online      # auto-overridden in trial mode
+
+optuna: {}
+
+# All algorithm / model / dataset / training parameters
+# reside inside cfg.run (loaded from the chosen run file).
