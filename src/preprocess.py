@@ -90,7 +90,7 @@ class GSMCollator:
 # Public builder
 # ---------------------------------------------------------------------------
 
-def build_dataloaders(cfg, tokenizer: PreTrainedTokenizer) -> Tuple[DataLoader, DataLoader]:
+def build_dataloaders(cfg, tokenizer: PreTrainedTokenizer, mode: str = "full") -> Tuple[DataLoader, DataLoader]:
     assert cfg.dataset.name.lower() == "gsm8k", "Only GSM8K supported."
 
     raw = load_dataset("openai/gsm8k", cfg.dataset.config, cache_dir=".cache/")
@@ -101,7 +101,7 @@ def build_dataloaders(cfg, tokenizer: PreTrainedTokenizer) -> Tuple[DataLoader, 
     train_ds = train_raw.map(map_fn, remove_columns=train_raw.column_names)
     val_ds = val_raw.map(map_fn, remove_columns=val_raw.column_names)
 
-    if cfg.mode == "trial":
+    if mode == "trial":
         train_ds = train_ds.select(range(min(16, len(train_ds))))
         val_ds = val_ds.select(range(min(32, len(val_ds))))
 

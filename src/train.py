@@ -221,7 +221,7 @@ def _run_one_seed(run_cfg, mode: str, seed: int, wandb_run):
     _set_seed(seed)
 
     tokenizer, model = build_model_and_tokenizer(run_cfg)
-    train_loader, val_loader = build_dataloaders(run_cfg, tokenizer)
+    train_loader, val_loader = build_dataloaders(run_cfg, tokenizer, mode)
     val_cycle = cycle(val_loader)
 
     param_groups = group_parameters_by_layer(model, run_cfg)
