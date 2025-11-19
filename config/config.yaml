@@ -5,10 +5,10 @@
 # ---------------------------------------------------------------------------
 
 defaults:
+  - optional runs@run: proposed-iter1-Qwen3-0.6B-gsm8k
   - _self_
-  - runs@run: ${run}
 
-run: ???            # Provided via CLI, e.g. run=proposed-iter1-Qwen3-0.6B-gsm8k
+run: proposed-iter1-Qwen3-0.6B-gsm8k  # Default value, override via CLI
 
 results_dir: ./results
 mode: full          # full | trial

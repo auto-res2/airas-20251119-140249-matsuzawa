@@ -392,7 +392,7 @@ def _run_optuna(run_cfg):
 # ---------------------------------------------------------------------------
 # Hydra entry point
 # ---------------------------------------------------------------------------
-@hydra.main(config_path="../config", config_name="config")
+@hydra.main(version_base=None, config_path="../config", config_name="config")
 def train(cfg):  # noqa: C901
     run_cfg = cfg.run  # run-specific subsection
 
