@@ -23,8 +23,7 @@ def build_model_and_tokenizer(run_cfg):
     model = AutoModelForCausalLM.from_pretrained(
         run_cfg.model.name,
         cache_dir=".cache",
-        torch_dtype=dtype,
-        device_map="auto",
+        dtype=dtype,
     )
     if hasattr(model, "gradient_checkpointing_enable"):
         model.gradient_checkpointing_enable()
